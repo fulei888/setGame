@@ -12,6 +12,9 @@
 		BC1B1C1520B24A6E00ED2471 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B1C1320B24A6E00ED2471 /* Main.storyboard */; };
 		BC1B1C1720B24A7000ED2471 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC1B1C1620B24A7000ED2471 /* Assets.xcassets */; };
 		BC1B1C1A20B24A7000ED2471 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B1C1820B24A7000ED2471 /* LaunchScreen.storyboard */; };
+		BC1B1C2420B262FC00ED2471 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C2320B262FC00ED2471 /* Card.swift */; };
+		BC1B1C2620B2636700ED2471 /* set-game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C2520B2636700ED2471 /* set-game.swift */; };
+		BCDAE70120B5631C002AB420 /* buttonTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDAE70020B5631C002AB420 /* buttonTitle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		BC1B1C1620B24A7000ED2471 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC1B1C1920B24A7000ED2471 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC1B1C1B20B24A7000ED2471 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC1B1C2320B262FC00ED2471 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		BC1B1C2520B2636700ED2471 /* set-game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "set-game.swift"; sourceTree = "<group>"; };
+		BCDAE70020B5631C002AB420 /* buttonTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonTitle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				BC1B1C1620B24A7000ED2471 /* Assets.xcassets */,
 				BC1B1C1820B24A7000ED2471 /* LaunchScreen.storyboard */,
 				BC1B1C1B20B24A7000ED2471 /* Info.plist */,
+				BC1B1C2320B262FC00ED2471 /* Card.swift */,
+				BC1B1C2520B2636700ED2471 /* set-game.swift */,
+				BCDAE70020B5631C002AB420 /* buttonTitle.swift */,
 			);
 			path = "set-game";
 			sourceTree = "<group>";
@@ -135,7 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDAE70120B5631C002AB420 /* buttonTitle.swift in Sources */,
+				BC1B1C2620B2636700ED2471 /* set-game.swift in Sources */,
 				BC1B1C1220B24A6E00ED2471 /* ViewController.swift in Sources */,
+				BC1B1C2420B262FC00ED2471 /* Card.swift in Sources */,
 				BC1B1C1020B24A6E00ED2471 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
