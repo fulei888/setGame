@@ -14,11 +14,12 @@ class buttonTitle{
     private static func getSymbol(card:Card) -> String {
         switch card.cardSymbol {
         case .diamond:
-                return "🔹"
+            
+                return "▲"
             case .oval:
-                return "🔴"
+                return "●"
             case .squiggle:
-                return "◻️"
+                return "■"
         }
     }
     private static func getColor(card: Card) -> UIColor {
@@ -44,7 +45,8 @@ class buttonTitle{
             return "\(symbol) \(symbol) \(symbol)"
             
         }
-        private static func getAttirbute(card: Card, title:String, color: UIColor) -> NSAttributedString {
+    }
+    private static func getAttirbute(card: Card, title:String, color: UIColor) -> NSAttributedString {
             var attributes: [NSAttributedStringKey: Any] = [:]
             
             switch card.cardShadinng {
@@ -58,10 +60,10 @@ class buttonTitle{
                 attributes[.strokeWidth] = -1
                 attributes[.foregroundColor] = color.withAlphaComponent(0.25)
             }
-            return NSAttributedString(string: title, attributes: attributes)
+        return NSAttributedString( string: title, attributes: attributes)
         }
         
-        public static func giveTitle(card: Card, onButton: UIButton){
+    public static func giveTitle(card: Card, onButton: UIButton){
             
             let buttonColor = getColor(card: card)
             let cardSymbol = getSymbol(card: card)
@@ -72,4 +74,4 @@ class buttonTitle{
             
         }
     }
-}
+

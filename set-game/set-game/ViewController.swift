@@ -15,6 +15,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var Score: UILabel!
     
     @IBAction func Restart(_ sender: Any) {
+        
+        
+        for buttonNum in cardButtons.indices{
+            let button = cardButtons[buttonNum]
+            button.setAttributedTitle(nil, for:  UIControlState.normal)
+            button.layer.borderColor = UIColor.white.cgColor
+            button.layer.borderWidth = 3
+        }
+        game.reset()
+        updateViewFromModel()
     }
     
     
@@ -26,6 +36,11 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var cardButtons: [UIButton]!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateViewFromModel()
+    }
 
     @IBAction func touchCard(_ sender: UIButton) {
         print("I love you william")
@@ -47,8 +62,13 @@ class ViewController: UIViewController {
         for index in cardButtons.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
+            button.layer.cornerRadius = 8
+            
+            buttonTitle.giveTitle(card: card, onButton: button)
             if card.clicked{
-                button.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                button.layer.borderColor = UIColor.green.cgColor
+                button.layer.borderWidth = 3
+                
             }
 
         }
