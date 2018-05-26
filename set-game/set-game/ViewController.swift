@@ -12,11 +12,19 @@ class ViewController: UIViewController {
     
     private var game: setgame = setgame()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        game.reset()
+        disAbleAllButton()
+        updateViewFromModel()
+        
+    }
+    
     @IBOutlet weak var Score: UILabel!
     
     @IBAction func Restart(_ sender: Any) {
-        
-        
+        disAbleAllButton()
+        noMoreThanThree.isEnabled = true
         for buttonNum in cardButtons.indices{
             let button = cardButtons[buttonNum]
             button.setAttributedTitle(nil, for:  UIControlState.normal)
@@ -32,15 +40,19 @@ class ViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var noMoreThanThree: UIButton!
+    
     @IBAction func Deal(_ sender: UIButton) {
+        game.setCards(numberOfCards: 3)
+        updateViewFromModel()
+        if game.cards.count >= 24 {
+            noMoreThanThree.isEnabled = false
+        }
     }
     
     @IBOutlet var cardButtons: [UIButton]!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateViewFromModel()
-    }
+    
 
     @IBAction func touchCard(_ sender: UIButton) {
         print("I love you william")
@@ -56,12 +68,20 @@ class ViewController: UIViewController {
     
     
     }
+    func disAbleAllButton(){
+        for i in cardButtons.indices{
+            let button = cardButtons[i]
+            button.isEnabled = false
+            
+        }
+    }
 
     private func updateViewFromModel(){
         
-        for index in cardButtons.indices{
+        for index in game.cards.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
+            button.isEnabled=true
             button.layer.cornerRadius = 8
             
             buttonTitle.giveTitle(card: card, onButton: button)

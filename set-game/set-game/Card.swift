@@ -7,17 +7,29 @@
 //
 
 import Foundation
-struct Card {
+struct Card : Equatable {
     
-    var clicked = false
-    var isMatched = false
-    
-    let cardColor: CardColor
-    let cardSymbol: CardSymbol
-    let cardNumber: CardNumber
-    let cardShadinng: CardShading
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        
+        
+        return  lhs.cardColor == rhs.cardColor &&
+                lhs.cardNumber == rhs.cardNumber &&
+                lhs.cardShading == rhs.cardShading &&
+                lhs.cardSymbol == rhs.cardSymbol
+    }
+        
+        var clicked = false
+        var isMatched = false
+        
+        let cardColor: CardColor
+        let cardSymbol: CardSymbol
+        let cardNumber: CardNumber
+        let cardShading: CardShading
+        
     
 }
+
+
     
 enum CardColor {
     case red

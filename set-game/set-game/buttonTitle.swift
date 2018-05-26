@@ -40,7 +40,7 @@ class buttonTitle{
         case .one:
             return symbol
         case .two:
-            return "\(symbol)\(symbol)\(symbol)"
+            return "\(symbol)\(symbol)"
         case .three:
             return "\(symbol) \(symbol) \(symbol)"
             
@@ -49,7 +49,7 @@ class buttonTitle{
     private static func getAttirbute(card: Card, title:String, color: UIColor) -> NSAttributedString {
             var attributes: [NSAttributedStringKey: Any] = [:]
             
-            switch card.cardShadinng {
+        switch card.cardShading {
             case .open:
                 attributes[.strokeWidth] = 4
                 attributes[.foregroundColor] = color
