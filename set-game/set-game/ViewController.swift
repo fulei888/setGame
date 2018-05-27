@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     private var game: setgame = setgame()
+    private var delayGoBackColor = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +44,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var noMoreThanThree: UIButton!
     
     @IBAction func Deal(_ sender: UIButton) {
+        if game.delayCardSignal{
+            
+            game.delayRemoveCard()
+            
+        }
+        else {
         game.setCards(numberOfCards: 3)
-        updateViewFromModel()
+        
         if game.cards.count >= 24 {
             noMoreThanThree.isEnabled = false
         }
+    }
+        updateViewFromModel()
     }
     
     @IBOutlet var cardButtons: [UIButton]!
@@ -58,6 +67,12 @@ class ViewController: UIViewController {
         print("I love you william")
         if let cardNumber = cardButtons.index(of: sender){
             print(cardNumber)
+            if game.delayColorSiginal{
+                game.delayChangColor()
+            }
+            if game.delayCardSignal{
+                game.delayRemoveCard()
+            }
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
 
@@ -78,15 +93,37 @@ class ViewController: UIViewController {
 
     private func updateViewFromModel(){
         
+        Score.text = "Score: \(game.score)"
         for index in game.cards.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
+           
+           
             button.isEnabled=true
             button.layer.cornerRadius = 8
             
             buttonTitle.giveTitle(card: card, onButton: button)
-            if card.clicked{
-                button.layer.borderColor = UIColor.green.cgColor
+            
+            
+            
+            if card.clicked {
+                
+                if card.isMatched {
+                    button.layer.borderColor = UIColor.green.cgColor
+                    button.layer.borderWidth = 3
+                    
+                    
+                }
+                else{
+                    button.layer.borderColor = UIColor.red.cgColor
+                    button.layer.borderWidth = 3
+                   
+                }
+                
+            }
+            else {
+                
+                button.layer.borderColor = UIColor.white.cgColor
                 button.layer.borderWidth = 3
                 
             }

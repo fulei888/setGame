@@ -12,50 +12,117 @@ class setgame{
     private(set) var cards = [Card]()
     private(set) var restCards = [Card]()
     private(set) var clickedCards = [Card]()
+    private(set) var index1 = 0
+    private(set) var index2 = 0
+    private(set) var index3 = 0
+    private(set) var delayColorSiginal = false
+    private(set) var delayCardSignal = false
+    private(set) var score = 10
+    private(set) var color = false
+    
+    private(set) var symbol = false
+    private(set) var shading = false
+    private(set) var number = false
+    
     
     func reset(){
-        
+        restCards.removeAll()
+        clickedCards.removeAll()
         cards.removeAll()
         makeAllCards()
-//        for num in cards.indices{
-//             cards[num].clicked = false
-//             cards[num].isMatched = false
-//        }
+        score = 10
+        
+
         
         setCards(numberOfCards: 12)
+    }
+    
+    func checkDifferentFeature (){
+        var colorsame = false
+        var colordif = false
+        var numbersame = false
+        var numberdif = false
+         var shadsame = false
+        var shaddif = false
+        var symbolsame = false
+        var symboldif = false
+        if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
+            
+            print ("color is eaqal")
+             colorsame = true
+        }
+        if clickedCards[0].cardColor != clickedCards[1].cardColor && clickedCards[1].cardColor != clickedCards[2].cardColor && clickedCards[0].cardColor != clickedCards[2].cardColor {
+            
+            print ("color is totally not eaqal")
+             colordif = true
+        }
+        if (clickedCards[0].cardNumber, clickedCards[1].cardNumber) == (clickedCards[1].cardNumber, clickedCards[2].cardNumber){
+            
+            print ("number is same")
+             numbersame = true
+        }
+         if clickedCards[0].cardNumber != clickedCards[1].cardNumber && clickedCards[1].cardNumber != clickedCards[2].cardNumber && clickedCards[0].cardNumber != clickedCards[2].cardNumber {
+            
+            print ("number is not same")
+             numberdif = true
+            
+        }
+         if (clickedCards[0].cardShading, clickedCards[1].cardShading) == (clickedCards[1].cardShading, clickedCards[2].cardShading){
+            
+            print ("shap is same")
+             shadsame = true
+        }
+        if clickedCards[0].cardShading != clickedCards[1].cardShading && clickedCards[1].cardShading != clickedCards[2].cardShading && clickedCards[0].cardShading != clickedCards[2].cardShading {
+            
+            print ("shap is not same")
+             shaddif = true
+        }
+            
+        if clickedCards[0].cardSymbol != clickedCards[1].cardSymbol && clickedCards[1].cardSymbol != clickedCards[2].cardSymbol && clickedCards[0].cardSymbol != clickedCards[2].cardSymbol {
+            
+            print ("symbol is not same")
+             symbolsame = true
+            
+        }
+         if (clickedCards[0].cardSymbol, clickedCards[1].cardSymbol) == (clickedCards[1].cardSymbol, clickedCards[2].cardSymbol){
+            
+            print ("symbol is  same")
+             symboldif = true
+        }
+        
+        if colorsame || colordif {
+            color = true
+        }
+        if numberdif || numbersame {
+            number = true
+        }
+        if symboldif || symbolsame {
+            symbol = true
+        }
+        if shaddif || shadsame {
+            shading = true
+        }
+        
+
     }
     
     
     func checkMatch() -> Bool {
         
         if clickedCards.count == 3 {
-            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
-                
+            print("three appear")
+            checkDifferentFeature()
+
+           
+            if (color && shading && symbol && number) {
+                 print ("woddff",color && shading && symbol && number)
                 return true
             }
-            else if clickedCards[0].cardColor != clickedCards[1].cardColor && clickedCards[1].cardColor != clickedCards[2].cardColor && clickedCards[0].cardColor != clickedCards[2].cardColor {
+            
+            
+            
                 
-                return true
-                
-            }
-            else if (clickedCards[0].cardNumber, clickedCards[1].cardNumber) == (clickedCards[1].cardNumber, clickedCards[2].cardNumber){
-                
-                return true
-            }
-            else if clickedCards[0].cardNumber != clickedCards[1].cardNumber && clickedCards[1].cardNumber != clickedCards[2].cardNumber && clickedCards[0].cardNumber != clickedCards[2].cardNumber {
-                
-                return true
-                
-            }
-            else if (clickedCards[0].cardShading, clickedCards[1].cardShading) == (clickedCards[1].cardShading, clickedCards[2].cardShading){
-                
-                return true
-            }
-            else if clickedCards[0].cardSymbol != clickedCards[1].cardSymbol && clickedCards[1].cardSymbol != clickedCards[2].cardSymbol && clickedCards[0].cardSymbol != clickedCards[2].cardSymbol {
-                
-                return true
-                
-            }
+
             else {
                 return false
             }
@@ -67,7 +134,7 @@ class setgame{
         
         return false
         }
-        
+      
         
     }
     
@@ -75,37 +142,67 @@ class setgame{
     func chooseCard (at index: Int) {
         assert(cards.indices.contains(index), "chosen index not in the cards")
         
-        if !cards[index].isMatched {
-            cards[index].clicked = true
-            
-        }
-        if checkMatch(){
-            for selectCard in clickedCards {
-                if let indexInCards = cards.index(of: selectCard){
-                    cards.remove(at: indexInCards )
-                    if restCards.count>0 {
-                        let newCard = restCards.remove(at: restCards.count.arc4random)
-                        cards.insert(newCard, at: indexInCards)
-                    }
-                    
-                }
-                
-                
-                
-            }
-            clickedCards.removeAll()
-        }
-        else if clickedCards.count==3 && !checkMatch(){
-            clickedCards.removeAll()
-        }
+        
+        
+        cards[index].clicked = true
+        
         if clickedCards.contains(cards[index]) {
+            
             
         }
         else {
             clickedCards.append(cards[index])
         }
+            
+       print("check mathc",checkMatch())
+        if checkMatch(){
+           
+            delayCardSignal = true
+            
+            score += 3
+             print("score",score)
+        }
+        else if clickedCards.count==3 && !checkMatch(){
+            
+            index1=cards.index(of: clickedCards[0])!
+            index2=cards.index(of: clickedCards[1])!
+            index3=cards.index(of: clickedCards[2])!
+            delayColorSiginal = true
+            score -= 1
+            clickedCards.removeAll()
+            
+        }
         
-        print(clickedCards.count)
+       
+        
+        
+    }
+    func delayRemoveCard(){
+        
+        for selectCard in clickedCards {
+            if let indexInCards = cards.index(of: selectCard){
+                                   cards.remove(at: indexInCards )
+                                    if restCards.count>0 {
+                                        let newCard = restCards.remove(at: restCards.count.arc4random)
+                                        cards.insert(newCard, at: indexInCards)
+                                 }
+                
+            }
+            
+            
+            
+        }
+        clickedCards.removeAll()
+        delayCardSignal=false
+        
+    }
+    
+    func delayChangColor(){
+        cards[index1].clicked = false
+        cards[index2].clicked = false
+        cards[index3].clicked = false
+        delayColorSiginal = false
+        
     }
     
     func makeAllCards(){
