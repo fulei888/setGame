@@ -329,8 +329,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-ap-faU">
-                                <rect key="frame" x="129" y="44" width="116" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-ap-faU">
+                                <rect key="frame" x="58" y="44" width="204" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="a5S-cK-LrS"/>
                                 </constraints>
@@ -343,9 +343,9 @@
                         <constraints>
                             <constraint firstItem="YLa-ap-faU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ebv-8U-3hM"/>
                             <constraint firstItem="XKw-iF-r3d" firstAttribute="top" secondItem="YLa-ap-faU" secondAttribute="bottom" constant="26" id="FYe-4G-iid"/>
-                            <constraint firstItem="YLa-ap-faU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="129" id="IMZ-jc-RO3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N9H-Mp-gmI" secondAttribute="trailing" constant="16" id="Lkj-Vw-gok"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N9H-Mp-gmI" secondAttribute="bottom" id="Vn9-jc-U5f"/>
+                            <constraint firstItem="YLa-ap-faU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="146.33333333333334" id="b4N-fV-VZP"/>
                             <constraint firstItem="YLa-ap-faU" firstAttribute="centerX" secondItem="XKw-iF-r3d" secondAttribute="centerX" id="bkQ-kD-CMk"/>
                             <constraint firstItem="XdJ-u8-td3" firstAttribute="top" secondItem="XKw-iF-r3d" secondAttribute="bottom" constant="400" id="euP-xF-daC"/>
                             <constraint firstItem="XKw-iF-r3d" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iQu-Zy-Rfz"/>
@@ -386,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
+            <point key="canvasLocation" x="117.59999999999999" y="118.22660098522168"/>
         </scene>
     </scenes>
 </document>
