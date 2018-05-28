@@ -13,24 +13,24 @@ struct Card : Equatable {
         
         
         return  lhs.cardColor == rhs.cardColor &&
-                lhs.cardNumber == rhs.cardNumber &&
-                lhs.cardShading == rhs.cardShading &&
-                lhs.cardSymbol == rhs.cardSymbol
+            lhs.cardNumber == rhs.cardNumber &&
+            lhs.cardShading == rhs.cardShading &&
+            lhs.cardSymbol == rhs.cardSymbol
     }
-        
-        var clicked = false
-        var isMatched = false
-        
-        let cardColor: CardColor
-        let cardSymbol: CardSymbol
-        let cardNumber: CardNumber
-        let cardShading: CardShading
-        
+    
+    var clicked = false
+    var isMatched = false
+    
+    let cardColor: CardColor
+    let cardSymbol: CardSymbol
+    let cardNumber: CardNumber
+    let cardShading: CardShading
+    
     
 }
 
 
-    
+
 enum CardColor {
     case red
     case green
@@ -63,6 +63,6 @@ enum CardShading {
     
     static let allValues = [solid, striped, open]
 }
-    
-    
+
+
 

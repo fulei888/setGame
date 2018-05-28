@@ -31,8 +31,9 @@ class ViewController: UIViewController {
         for buttonNum in cardButtons.indices{
             let button = cardButtons[buttonNum]
             button.setAttributedTitle(nil, for:  UIControlState.normal)
-            button.layer.borderColor = UIColor.white.cgColor
-            button.layer.borderWidth = 3
+//            button.layer.borderColor = UIColor.white.cgColor
+//            button.layer.borderWidth = 3
+            button.originState()
             button.isHidden = false
             button.layer.cornerRadius = 8
         }
@@ -40,6 +41,7 @@ class ViewController: UIViewController {
         updateViewFromModel()
         
     }
+    
     
     
     @IBAction func Cheat(_ sender: UIButton) {
@@ -135,27 +137,44 @@ class ViewController: UIViewController {
             if card.clicked {
                 
                 if card.isMatched {
-                    button.layer.borderColor = UIColor.green.cgColor
-                    button.layer.borderWidth = 3
+//                    button.layer.borderColor = UIColor.green.cgColor
+//                    button.layer.borderWidth = 3
+                    button.matchedState()
                     
                     
                 }
                 else{
-                    button.layer.borderColor = UIColor.red.cgColor
-                    button.layer.borderWidth = 3
+//                    button.layer.borderColor = UIColor.red.cgColor
+//                    button.layer.borderWidth = 3
+                    button.noMatchedState()
                     
                 }
                 
             }
             else {
                 
-                button.layer.borderColor = UIColor.white.cgColor
-                button.layer.borderWidth = 3
+//                button.layer.borderColor = UIColor.white.cgColor
+//                button.layer.borderWidth = 3
+                button.originState()
                 
             }
             
         }
     }
     
+}
+extension UIButton {
+    func originState(){
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 3
+    }
+    func matchedState(){
+        self.layer.borderColor = UIColor.green.cgColor
+        self.layer.borderWidth = 3
+    }
+    func noMatchedState(){
+        self.layer.borderColor = UIColor.red.cgColor
+        self.layer.borderWidth = 3
+    }
 }
 
