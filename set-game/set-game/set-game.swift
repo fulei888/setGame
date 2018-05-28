@@ -23,7 +23,7 @@ class setgame{
     private(set) var symbol = false
     private(set) var shading = false
     private(set) var number = false
-    
+   
     
     func reset(){
         restCards.removeAll()
@@ -93,14 +93,26 @@ class setgame{
         if colorsame || colordif {
             color = true
         }
+        else {
+            color = false
+        }
         if numberdif || numbersame {
             number = true
+        }
+        else {
+            number = false
         }
         if symboldif || symbolsame {
             symbol = true
         }
+        else {
+            symbol = false
+        }
         if shaddif || shadsame {
             shading = true
+        }
+        else {
+            shading = false
         }
         
 
@@ -109,6 +121,7 @@ class setgame{
     
     func checkMatch() -> Bool {
         
+        print (color,shading,symbol,number)
         if clickedCards.count == 3 {
             print("three appear")
             checkDifferentFeature()
@@ -190,10 +203,10 @@ class setgame{
         for selectCard in clickedCards {
             if let indexInCards = cards.index(of: selectCard){
                                    cards.remove(at: indexInCards )
-                                    if restCards.count>0 {
-                                        let newCard = restCards.remove(at: restCards.count.arc4random)
-                                        cards.insert(newCard, at: indexInCards)
-                                 }
+//                                    if restCards.count>0 {
+//                                        let newCard = restCards.remove(at: restCards.count.arc4random)
+//                                        cards.insert(newCard, at: indexInCards)
+//                                 }
                 
             }
             
