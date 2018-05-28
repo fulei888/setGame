@@ -23,8 +23,8 @@ class setgame{
     private(set) var symbol = false
     private(set) var shading = false
     private(set) var number = false
-   
-    
+    var noRestCardSignal = false
+    var freezingIndex = [Int]()
     func reset(){
         restCards.removeAll()
         clickedCards.removeAll()
@@ -32,7 +32,7 @@ class setgame{
         makeAllCards()
         score = 10
         
-
+        
         
         setCards(numberOfCards: 12)
     }
@@ -42,52 +42,52 @@ class setgame{
         var colordif = false
         var numbersame = false
         var numberdif = false
-         var shadsame = false
+        var shadsame = false
         var shaddif = false
         var symbolsame = false
         var symboldif = false
         if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
             
             print ("color is eaqal")
-             colorsame = true
+            colorsame = true
         }
         if clickedCards[0].cardColor != clickedCards[1].cardColor && clickedCards[1].cardColor != clickedCards[2].cardColor && clickedCards[0].cardColor != clickedCards[2].cardColor {
             
             print ("color is totally not eaqal")
-             colordif = true
+            colordif = true
         }
         if (clickedCards[0].cardNumber, clickedCards[1].cardNumber) == (clickedCards[1].cardNumber, clickedCards[2].cardNumber){
             
             print ("number is same")
-             numbersame = true
+            numbersame = true
         }
-         if clickedCards[0].cardNumber != clickedCards[1].cardNumber && clickedCards[1].cardNumber != clickedCards[2].cardNumber && clickedCards[0].cardNumber != clickedCards[2].cardNumber {
+        if clickedCards[0].cardNumber != clickedCards[1].cardNumber && clickedCards[1].cardNumber != clickedCards[2].cardNumber && clickedCards[0].cardNumber != clickedCards[2].cardNumber {
             
             print ("number is not same")
-             numberdif = true
+            numberdif = true
             
         }
-         if (clickedCards[0].cardShading, clickedCards[1].cardShading) == (clickedCards[1].cardShading, clickedCards[2].cardShading){
+        if (clickedCards[0].cardShading, clickedCards[1].cardShading) == (clickedCards[1].cardShading, clickedCards[2].cardShading){
             
             print ("shap is same")
-             shadsame = true
+            shadsame = true
         }
         if clickedCards[0].cardShading != clickedCards[1].cardShading && clickedCards[1].cardShading != clickedCards[2].cardShading && clickedCards[0].cardShading != clickedCards[2].cardShading {
             
             print ("shap is not same")
-             shaddif = true
+            shaddif = true
         }
-            
+        
         if clickedCards[0].cardSymbol != clickedCards[1].cardSymbol && clickedCards[1].cardSymbol != clickedCards[2].cardSymbol && clickedCards[0].cardSymbol != clickedCards[2].cardSymbol {
             
             print ("symbol is not same")
-             symbolsame = true
+            symbolsame = true
             
         }
-         if (clickedCards[0].cardSymbol, clickedCards[1].cardSymbol) == (clickedCards[1].cardSymbol, clickedCards[2].cardSymbol){
+        if (clickedCards[0].cardSymbol, clickedCards[1].cardSymbol) == (clickedCards[1].cardSymbol, clickedCards[2].cardSymbol){
             
             print ("symbol is  same")
-             symboldif = true
+            symboldif = true
         }
         
         if colorsame || colordif {
@@ -115,7 +115,7 @@ class setgame{
             shading = false
         }
         
-
+        
     }
     
     
@@ -125,25 +125,25 @@ class setgame{
         if clickedCards.count == 3 {
             print("three appear")
             checkDifferentFeature()
-
-           
+            
+            
             if (color && shading && symbol && number) {
-                 print ("woddff",color && shading && symbol && number)
+                print ("woddff",color && shading && symbol && number)
                 cards[cards.index(of: clickedCards[0])!].isMatched = true
                 cards[cards.index(of: clickedCards[1])!].isMatched = true
                 cards[cards.index(of: clickedCards[2])!].isMatched = true
                 return true
             }
-            
-//            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
-//                cards[cards.index(of: clickedCards[0])!].isMatched = true
-//                cards[cards.index(of: clickedCards[1])!].isMatched = true
-//                cards[cards.index(of: clickedCards[2])!].isMatched = true
-//               return true
-//            }
-            
                 
-
+                //            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
+                //                cards[cards.index(of: clickedCards[0])!].isMatched = true
+                //                cards[cards.index(of: clickedCards[1])!].isMatched = true
+                //                cards[cards.index(of: clickedCards[2])!].isMatched = true
+                //               return true
+                //            }
+                
+                
+                
             else {
                 return false
             }
@@ -152,10 +152,10 @@ class setgame{
             
         }
         else{
-        
-        return false
+            
+            return false
         }
-      
+        
         
     }
     
@@ -174,14 +174,14 @@ class setgame{
         else {
             clickedCards.append(cards[index])
         }
-            
-       print("check mathc",checkMatch())
+        
+        print("check mathc",checkMatch())
         if checkMatch(){
-           
+            
             delayCardSignal = true
             
             score += 3
-             print("score",score)
+            print("score",score)
         }
         else if clickedCards.count==3 && !checkMatch(){
             
@@ -194,7 +194,7 @@ class setgame{
             
         }
         
-       
+        
         
         
     }
@@ -202,11 +202,25 @@ class setgame{
         
         for selectCard in clickedCards {
             if let indexInCards = cards.index(of: selectCard){
-                                   cards.remove(at: indexInCards )
-//                                    if restCards.count>0 {
-//                                        let newCard = restCards.remove(at: restCards.count.arc4random)
-//                                        cards.insert(newCard, at: indexInCards)
-//                                 }
+                
+                if restCards.count>0 {
+                    cards.remove(at: indexInCards )
+                    let newCard = restCards.remove(at: restCards.count.arc4random)
+                    cards.insert(newCard, at: indexInCards)
+                }
+                else {
+                    if restCards.count > 0 {
+                        noRestCardSignal = true
+                        freezingIndex.append(indexInCards)
+                        
+                    }
+                }
+                
+                //                if restCards.count > 0 {
+                //                    noRestCardSignal = true
+                //                    freezingIndex.append(indexInCards)
+                //
+                //                }
                 
             }
             
@@ -233,20 +247,20 @@ class setgame{
                 for number in CardNumber.allValues{
                     for shading in CardShading.allValues{
                         let newCard = Card(clicked: false, isMatched: false, cardColor: color, cardSymbol: symbol, cardNumber: number, cardShading: shading)
-                            restCards.append(newCard)
+                        restCards.append(newCard)
                         
-                        }
                     }
                 }
             }
         }
+    }
     
     func giveCard (){
         
         
-            let randomIndex = Int(arc4random_uniform(UInt32(restCards.count)))
-            let randomCard = restCards.remove(at: randomIndex)
-            cards.append(randomCard)
+        let randomIndex = Int(arc4random_uniform(UInt32(restCards.count)))
+        let randomCard = restCards.remove(at: randomIndex)
+        cards.append(randomCard)
     }
     
     func setCards (numberOfCards: Int) {
@@ -269,7 +283,7 @@ extension Int {
         } else {
             return 0
         }
-}
+    }
 }
 
 

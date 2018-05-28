@@ -50,19 +50,19 @@ class ViewController: UIViewController {
             
         }
         else {
-        game.setCards(numberOfCards: 3)
-        
-        if game.cards.count >= 24 {
-            noMoreThanThree.isEnabled = false
+            game.setCards(numberOfCards: 3)
+            
+            if game.cards.count >= 24 {
+                noMoreThanThree.isEnabled = false
+            }
         }
-    }
         updateViewFromModel()
     }
     
     @IBOutlet var cardButtons: [UIButton]!
     
     
-
+    
     @IBAction func touchCard(_ sender: UIButton) {
         print("I love you william")
         if let cardNumber = cardButtons.index(of: sender){
@@ -75,13 +75,13 @@ class ViewController: UIViewController {
             }
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
-
+            
         }
         else{
             print("Chosen card was not in cardButtons")
         }
-    
-    
+        
+        
     }
     func disAbleAllButton(){
         for i in cardButtons.indices{
@@ -90,19 +90,40 @@ class ViewController: UIViewController {
             
         }
     }
-
+    
     private func updateViewFromModel(){
         
         Score.text = "Score: \(game.score)"
+        
+        if game.noRestCardSignal {
+            
+            let  freezingIndex1 = game.freezingIndex[0]
+            let freezingIndex2 = game.freezingIndex[1]
+            let  freezingIndex3 = game.freezingIndex[2]
+            //            cardButtons[freeingIndex1].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            //            cardButtons[freeingIndex2].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            //            cardButtons[freeingIndex3].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            //            cardButtons[freeingIndex1] isEnabled=true
+            //            cardButtons[freeingIndex2].isEnabled=true
+            //            cardButtons[freeingIndex3].isEnabled=true
+            cardButtons[freezingIndex1].isHidden = true
+            cardButtons[freezingIndex2].isHidden = true
+            cardButtons[freezingIndex3].isHidden = true
+            game.freezingIndex.removeAll()
+            game.noRestCardSignal = false
+        }
+        
         for index in game.cards.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
-           
-           
+            
+            
             button.isEnabled=true
             button.layer.cornerRadius = 8
             
             buttonTitle.giveTitle(card: card, onButton: button)
+            
+            
             
             
             
@@ -117,7 +138,7 @@ class ViewController: UIViewController {
                 else{
                     button.layer.borderColor = UIColor.red.cgColor
                     button.layer.borderWidth = 3
-                   
+                    
                 }
                 
             }
@@ -127,9 +148,9 @@ class ViewController: UIViewController {
                 button.layer.borderWidth = 3
                 
             }
-
+            
         }
     }
-        
+    
 }
 
