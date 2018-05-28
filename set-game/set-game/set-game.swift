@@ -127,20 +127,20 @@ class setgame{
             checkDifferentFeature()
             
             
-            if (color && shading && symbol && number) {
-                print ("woddff",color && shading && symbol && number)
-                cards[cards.index(of: clickedCards[0])!].isMatched = true
-                cards[cards.index(of: clickedCards[1])!].isMatched = true
-                cards[cards.index(of: clickedCards[2])!].isMatched = true
-                return true
-            }
-                
-                //            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
-                //                cards[cards.index(of: clickedCards[0])!].isMatched = true
-                //                cards[cards.index(of: clickedCards[1])!].isMatched = true
-                //                cards[cards.index(of: clickedCards[2])!].isMatched = true
-                //               return true
-                //            }
+//            if (color && shading && symbol && number) {
+//                print ("woddff",color && shading && symbol && number)
+//                cards[cards.index(of: clickedCards[0])!].isMatched = true
+//                cards[cards.index(of: clickedCards[1])!].isMatched = true
+//                cards[cards.index(of: clickedCards[2])!].isMatched = true
+//                return true
+//            }
+            
+                            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
+                                cards[cards.index(of: clickedCards[0])!].isMatched = true
+                                cards[cards.index(of: clickedCards[1])!].isMatched = true
+                                cards[cards.index(of: clickedCards[2])!].isMatched = true
+                               return true
+                            }
                 
                 
                 
@@ -209,11 +209,11 @@ class setgame{
                     cards.insert(newCard, at: indexInCards)
                 }
                 else {
-                    if restCards.count > 0 {
+                    
                         noRestCardSignal = true
                         freezingIndex.append(indexInCards)
                         
-                    }
+                    
                 }
                 
                 //                if restCards.count > 0 {

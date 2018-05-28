@@ -15,15 +15,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        game.reset()
-        disAbleAllButton()
-        updateViewFromModel()
         
+        restart()
     }
     
     @IBOutlet weak var Score: UILabel!
     
     @IBAction func Restart(_ sender: Any) {
+
+        restart()
+    }
+    func restart() {
         disAbleAllButton()
         noMoreThanThree.isEnabled = true
         for buttonNum in cardButtons.indices{
@@ -31,9 +33,12 @@ class ViewController: UIViewController {
             button.setAttributedTitle(nil, for:  UIControlState.normal)
             button.layer.borderColor = UIColor.white.cgColor
             button.layer.borderWidth = 3
+            button.isHidden = false
+            button.layer.cornerRadius = 8
         }
         game.reset()
         updateViewFromModel()
+        
     }
     
     
