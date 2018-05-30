@@ -13,12 +13,12 @@ class buttonTitle{
     
     private static func getSymbol(card:Card) -> String {
         switch card.cardSymbol {
-        case .diamond:
+        case .triagle:
             
             return "▲"
-        case .oval:
+        case .circle:
             return "●"
-        case .squiggle:
+        case .square:
             return "■"
         }
     }
@@ -29,8 +29,8 @@ class buttonTitle{
             return #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
         case .red:
             return UIColor.red
-        case .purple:
-            return UIColor.purple
+        case .blue:
+            return UIColor.blue
             
         }
     }
@@ -58,7 +58,7 @@ class buttonTitle{
             attributes[.foregroundColor] = color
         case .striped:
             attributes[.strokeWidth] = -1
-            attributes[.foregroundColor] = color.withAlphaComponent(0.25)
+            attributes[.foregroundColor] = color.withAlphaComponent(0.2)
         }
         return NSAttributedString( string: title, attributes: attributes)
     }

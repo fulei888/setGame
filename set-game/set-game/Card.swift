@@ -34,17 +34,16 @@ struct Card : Equatable {
 enum CardColor {
     case red
     case green
-    case purple
-    
-    static let allValues = [red, green, purple]
+    case blue
+    static let allValues = [red, green, blue]
 }
 
 enum CardSymbol {
-    case diamond
-    case squiggle
-    case oval
+    case triagle
+    case square
+    case circle
     
-    static let allValues = [diamond, squiggle, oval]
+    static let allValues = [triagle, square, circle]
 }
 
 enum CardNumber {

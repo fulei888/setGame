@@ -235,8 +235,9 @@ class setgame{
 //    }
     func delayRemoveCard(){
         
-        clickedCards.forEach {
-            if let indexInCards = cards.index(of: $0){
+       // clickedCards.forEach {
+        for selectedCard in clickedCards {
+            if let indexInCards = cards.index(of: selectedCard){
                 
                 if restCards.count>0 {
                     cards.remove(at: indexInCards )
