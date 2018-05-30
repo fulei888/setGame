@@ -80,7 +80,7 @@ class ViewController: UIViewController {
             if game.delayCardSignal{
                 game.delayRemoveCard()
             }
-            game.chooseCard(at: cardNumber)
+            game.chooseCard( closure: game.checkMatch, at: cardNumber)
             updateViewFromModel()
             
         }
@@ -119,6 +119,11 @@ class ViewController: UIViewController {
             game.freezingIndex.removeAll()
             game.noRestCardSignal = false
         }
+        
+        
+//        let checkedChange = game.cards.indices.filer {cards[$0].clicked}
+//        return
+        
         
         for index in game.cards.indices{
             let button = cardButtons[index]

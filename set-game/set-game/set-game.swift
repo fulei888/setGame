@@ -127,21 +127,21 @@ class setgame{
             checkDifferentFeature()
             
             
-            //            if (color && shading && symbol && number) {
-            //                print ("woddff",color && shading && symbol && number)
-            //                cards[cards.index(of: clickedCards[0])!].isMatched = true
-            //                cards[cards.index(of: clickedCards[1])!].isMatched = true
-            //                cards[cards.index(of: clickedCards[2])!].isMatched = true
-            //                return true
-            //            }
+                        if (color && shading && symbol && number) {
+                            print ("woddff",color && shading && symbol && number)
+                            cards[cards.index(of: clickedCards[0])!].isMatched = true
+                            cards[cards.index(of: clickedCards[1])!].isMatched = true
+                            cards[cards.index(of: clickedCards[2])!].isMatched = true
+                            return true
+                        }
             
-            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
-                cards[cards.index(of: clickedCards[0])!].isMatched = true
-                cards[cards.index(of: clickedCards[1])!].isMatched = true
-                cards[cards.index(of: clickedCards[2])!].isMatched = true
-                return true
-            }
-                
+//            if (clickedCards[0].cardColor, clickedCards[1].cardColor) == (clickedCards[1].cardColor, clickedCards[2].cardColor){
+//                cards[cards.index(of: clickedCards[0])!].isMatched = true
+//                cards[cards.index(of: clickedCards[1])!].isMatched = true
+//                cards[cards.index(of: clickedCards[2])!].isMatched = true
+//                return true
+//            }
+            
                 
                 
             else {
@@ -159,8 +159,8 @@ class setgame{
         
     }
     
-    
-    func chooseCard (at index: Int) {
+    func chooseCard (closure: () -> Bool, at index: Int){
+        
         assert(cards.indices.contains(index), "chosen index not in the cards")
         
         
@@ -175,15 +175,13 @@ class setgame{
             clickedCards.append(cards[index])
         }
         
-        print("check mathc",checkMatch())
-        if checkMatch(){
-            
+        if closure () {
             delayCardSignal = true
             
             score += 3
             print("score",score)
         }
-        else if clickedCards.count==3 && !checkMatch(){
+        else if clickedCards.count==3 && !closure(){
             
             index1=cards.index(of: clickedCards[0])!
             index2=cards.index(of: clickedCards[1])!
@@ -194,10 +192,47 @@ class setgame{
             
         }
         
-        
-        
-        
     }
+    
+    
+//    func chooseCard (at index: Int) {
+//        assert(cards.indices.contains(index), "chosen index not in the cards")
+//
+//
+//
+//        cards[index].clicked = true
+//
+//        if clickedCards.contains(cards[index]) {
+//
+//
+//        }
+//        else {
+//            clickedCards.append(cards[index])
+//        }
+//
+//       // print("check mathc",checkMatch())
+//        if checkMatch(){
+//
+//            delayCardSignal = true
+//
+//            score += 3
+//            print("score",score)
+//        }
+//        else if clickedCards.count==3 && !checkMatch(){
+//
+//            index1=cards.index(of: clickedCards[0])!
+//            index2=cards.index(of: clickedCards[1])!
+//            index3=cards.index(of: clickedCards[2])!
+//            delayColorSiginal = true
+//            score -= 1
+//            clickedCards.removeAll()
+//
+//        }
+//
+//
+//
+//
+//    }
     func delayRemoveCard(){
         
         clickedCards.forEach {
@@ -255,9 +290,11 @@ class setgame{
         }
     }
     
+    
+    
     func giveCard (){
-        
-        
+
+
         let randomIndex = Int(arc4random_uniform(UInt32(restCards.count)))
         let randomCard = restCards.remove(at: randomIndex)
         cards.append(randomCard)
@@ -270,6 +307,12 @@ class setgame{
         }
         
     }
+    var setCards1:  (Int)-> () = { (numberofCards) in
+        for _ in 0..<numberofCards {
+            
+        }
+    }
+    
     
 }
 
