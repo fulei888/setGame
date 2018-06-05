@@ -13,12 +13,12 @@ class buttonTitle{
     
     private static func getSymbol(card:Card) -> String {
         switch card.cardSymbol {
-        case .triagle:
+        case .diamond:
             
             return "▲"
-        case .circle:
+        case .oval:
             return "●"
-        case .square:
+        case .squiggle:
             return "■"
         }
     }
