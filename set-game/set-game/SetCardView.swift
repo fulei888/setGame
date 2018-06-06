@@ -1,149 +1,284 @@
-//
-//  SetCardView.swift
-//  set-game
-//
-//  Created by guest1 on 6/2/18.
-//  Copyright © 2018 Lei Fu. All rights reserved.
-//
-
 import UIKit
 
 @IBDesignable
-
-class SetCardView: UIView {
+class SetCardView: UIView
+{
+    private enum CardOrientation {
+        case vertical
+        case horizontal
+    }
     
-    @IBInspectable
-    var shape: String = ""  { didSet { setNeedsDisplay() } }
-    @IBInspectable
-    var color: UIColor = .green //You can use UIColor with @IBInspectable too (String, Int, Bool and UIColor)
+    enum CardShading {
+        case outline
+        case striped
+        case solid
+    }
     
-    enum Shape: String {
+    enum CardShape {
         case diamond
         case squiggle
         case oval
     }
-    enum Color: String{
-        case red
-        case green
-        case blue
+    
+    var color: UIColor = UIColor.red  { didSet { setNeedsDisplay() } }
+    var shading: CardShading = .striped  { didSet { setNeedsDisplay() } }
+    var shape: CardShape = .oval  { didSet { setNeedsDisplay() } }
+    var number: Int = 2 { didSet { setNeedsDisplay() } }
+    var isFaceUp: Bool = true { didSet { setNeedsDisplay() } }
+    
+    var outlineColor: UIColor? = nil { didSet { setNeedsDisplay() } }
+    
+    private var orientation: CardOrientation {
+        if bounds.height > bounds.width {
+            
+            return .vertical
+        } else {
+            return .horizontal
+        }
     }
     
     override func draw(_ rect: CGRect) {
-        //Use this to save and restore your
-        let context = UIGraphicsGetCurrentContext()
-        context?.saveGState()
-        transform = CGAffineTransform.identity.translatedBy(x: 10, y: 10)
-        context?.restoreGState()
+        createCardBack()
+        if isFaceUp {
+            createShapes()
+        }
+    }
+    
+    override func setNeedsDisplay() {
+        super.setNeedsDisplay()
         
-        switch shape {
-        case Shape.diamond.rawValue:
+        self.isOpaque = false
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setNeedsDisplay()
+    }
+    
+    private func createCardBack() {
+        let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
+        roundedRect.addClip()
+        if isFaceUp {
+            UIColor.white.setFill()
+            if let outlineColor = outlineColor {
+                roundedRect.lineWidth = 5.0
+                outlineColor.setStroke()
+            }
+        } else {
+            UIColor(rgbColorCodeRed: 255, green: 50, blue: 60, alpha: 1.0).setFill()
+            roundedRect.fill()
+            roundedRect.lineWidth = 2.0
+            UIColor.white.setStroke()
+        }
+        roundedRect.fill()
+        roundedRect.stroke()
+        
+    }
+    private func createShapes() {
+        
+        let maxDrawableArea = CGRect(x: bounds.minX + borderWidth, y: bounds.minY + borderHeight, width: bounds.width - (2 * borderWidth), height: bounds.height - (2 * borderHeight))
+        
+        let drawingAreas = createDrawingAreas(number: number, inDrawableZone: maxDrawableArea)
+        for area in drawingAreas {
+            var path: UIBezierPath
             
-            drawDiamond()
-        case Shape.oval.rawValue:
-            drawOval()
-        case Shape.squiggle.rawValue:
-            drawSquiggle()
+            switch shape {
+            case .diamond:
+                path = makeDiamond(inDrawingArea: area)
+            case .oval:
+                path = makeOval(inDrawingArea: area)
+            case .squiggle:
+                path = makeSquiggle(inDrawingArea: area)
+            }
             
-        default: break
+            switch shading {
+            case .outline:
+                outline(shape: path, withColor: color)
+            case .solid:
+                fill(shape: path, withColor: color)
+            case .striped:
+                stripe(shape: path, withColor: color)
+            }
+        }
+    }
+    
+    private func createDrawingAreas(number: Int, inDrawableZone maxDrawableArea: CGRect) -> [CGRect] {
+        let xDefaultCoordinate = maxDrawableArea.minX + internalBorderWidth
+        let yDefaultCoordinate = maxDrawableArea.minY + internalBorderHeight
+        
+        var shapeHeight: CGFloat = 0
+        var shapeWidth: CGFloat = 0
+        var longestCardSide: CGFloat = 0
+        switch orientation {
+        case .vertical:
+            longestCardSide = maxDrawableArea.height
+            shapeHeight = (maxDrawableArea.height / 3) - (2 * internalBorderHeight)
+            shapeWidth = maxDrawableArea.width - (2 * internalBorderWidth)
+        case.horizontal:
+            longestCardSide = maxDrawableArea.width
+            shapeHeight = maxDrawableArea.height - (2 * internalBorderHeight)
+            shapeWidth = (maxDrawableArea.width / 3) - (2 * internalBorderWidth)
         }
         
-//        switch color {
-//        case Color.red:
-//            drawRed()
-//        case Color.blue:
-//            drawBlue()
-//        case Color.green.rawValue:
-//            drawGreen()
-//        }
-//        let card = Card()
-//        switch  card.cardSymbol{
-//        case .diamond:
-//
-//            drawDiamond()
-//        case .oval:
-//            drawOval()
-//
-//        case .squiggle:
-//            drawSquiggle()
-//        default: break
-//        }
-//        switch card.cardColor {
-//        case .blue:
-//
-//        case .red:
-//
-//        case .green:
-//
-//        }
+        var startingPointProportions = [CGFloat]()
+        switch number {
+        case 1:
+            startingPointProportions = [CGFloat(1.0/3)]
+        case 2:
+            startingPointProportions = [CGFloat(1.0/6), CGFloat(1.0/2)]
+        case 3:
+            startingPointProportions = [CGFloat(0), CGFloat(1.0/3), CGFloat(2.0/3)]
+        default:
+            break
+        }
+        var drawingAreas = [CGRect]()
+        for startingPoint in startingPointProportions {
+            var shapeArea = CGRect.zero
+            switch orientation {
+            case .vertical:
+                shapeArea = CGRect(x: xDefaultCoordinate, y: yDefaultCoordinate + (startingPoint * longestCardSide), width: shapeWidth, height: shapeHeight)
+            case .horizontal:
+                shapeArea = CGRect(x: xDefaultCoordinate + (startingPoint * longestCardSide), y: yDefaultCoordinate, width: shapeWidth, height: shapeHeight)
+                
+            }
+            drawingAreas.append(shapeArea)
+        }
+        return drawingAreas
     }
     
-    
-    private struct DrawingConstants {
-        static let padding: CGFloat = 0.05
-        static let topPadding: CGFloat = 0.05
-        static let paddingDiamond: CGFloat = 0.05
-    }
-    
-    private func drawDiamond() {
+    private func makeOval(inDrawingArea drawingRect: CGRect) -> UIBezierPath {
         let path = UIBezierPath()
-//        path.move(to: CGPoint(x: bounds.minX+bounds.width*DrawingConstants.padding, y: bounds.midY))
+        path.move(to: CGPoint(x: 10, y: 10))
+        path.addLine(to: CGPoint(x: 30, y: 10))
+        path.addArc(withCenter: CGPoint(x: 30, y: 20), radius: 10, startAngle: -CGFloat.pi / 2, endAngle: CGFloat.pi / 2, clockwise: true)
+        path.addLine(to: CGPoint(x: 10, y: 30))
+        path.addArc(withCenter: CGPoint(x: 10, y: 20), radius: 10, startAngle: CGFloat.pi / 2, endAngle: -CGFloat.pi / 2, clockwise: true)
         
-        path.move(to: CGPoint(x: bounds.midX, y: bounds.minY + bounds.width*DrawingConstants.paddingDiamond))
-        path.addLine(to: CGPoint(x: bounds.maxX - bounds.width*DrawingConstants.paddingDiamond, y: bounds.midY))
-        path.addLine(to: CGPoint(x: bounds.midX, y: bounds.maxY - bounds.width*DrawingConstants.paddingDiamond))
-        path.addLine(to: CGPoint(x: bounds.minX + bounds.width*DrawingConstants.paddingDiamond, y: bounds.midY))
-        path.close()
-        UIColor.red.setStroke()
+        scaleAndTranslateShape(drawingRect, path)
+        return path
+    }
+    
+    private func makeSquiggle(inDrawingArea drawingRect: CGRect) -> UIBezierPath {
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: 104, y: 15));
+        path.addCurve(to: CGPoint(x: 63, y: 54), controlPoint1: CGPoint(x: 112.4, y: 36.9), controlPoint2: CGPoint(x: 89.7, y: 60.8))
+        path.addCurve(to: CGPoint(x: 27, y: 53), controlPoint1: CGPoint(x: 52.3, y: 51.3), controlPoint2: CGPoint(x: 42.2, y: 42))
+        path.addCurve(to: CGPoint(x: 5, y: 40), controlPoint1: CGPoint(x: 9.6, y: 65.6), controlPoint2: CGPoint(x: 5.4, y: 58.3))
+        path.addCurve(to: CGPoint(x: 36, y: 12), controlPoint1: CGPoint(x: 4.6, y: 22), controlPoint2: CGPoint(x: 19.1, y: 9.7))
+        path.addCurve(to: CGPoint(x: 89, y: 14), controlPoint1: CGPoint(x: 59.2, y: 15.2), controlPoint2: CGPoint(x: 61.9, y: 31.5))
+        path.addCurve(to: CGPoint(x: 104, y: 15), controlPoint1: CGPoint(x: 95.3, y: 10), controlPoint2: CGPoint(x: 100.9, y: 6.9))
+        
+        scaleAndTranslateShape(drawingRect, path)
+        return path
+    }
+    
+    private func makeDiamond(inDrawingArea drawingRect: CGRect) -> UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: drawingRect.minX, y: drawingRect.midY))
+        path.addLine(to: CGPoint(x: drawingRect.midX, y: drawingRect.minY))
+        path.addLine(to: CGPoint(x: drawingRect.maxX, y: drawingRect.midY))
+        path.addLine(to: CGPoint(x: drawingRect.midX, y: drawingRect.maxY))
+        path.addLine(to: CGPoint(x: drawingRect.minX, y: drawingRect.midY))
+        return path
+    }
+    
+    private func scaleAndTranslateShape(_ drawingRect: CGRect, _ path: UIBezierPath) {
+        var scaleFactor: CGFloat = 0.0
+        switch orientation {
+        case .vertical:
+            scaleFactor = drawingRect.height / path.bounds.height
+            path.apply(CGAffineTransform(scaleX: scaleFactor, y: scaleFactor))
+            if path.bounds.width > drawingRect.width {
+                scaleFactor = drawingRect.width / path.bounds.width
+                path.apply(CGAffineTransform(scaleX: scaleFactor, y: scaleFactor))
+            }
+        case .horizontal:
+            path.apply(CGAffineTransform(rotationAngle: CGFloat.pi / 2))
+            scaleFactor = drawingRect.width / path.bounds.width
+            path.apply(CGAffineTransform(scaleX: scaleFactor, y: scaleFactor))
+            if path.bounds.height > drawingRect.height {
+                scaleFactor = drawingRect.height / path.bounds.height
+                path.apply(CGAffineTransform(scaleX: scaleFactor, y: scaleFactor))
+            }
+        }
+        
+        path.apply(CGAffineTransform(translationX: drawingRect.midX - path.bounds.width / 2 - path.bounds.minX, y: drawingRect.midY - path.bounds.height / 2 - path.bounds.minY))
+    }
+    
+    private func outline(shape path: UIBezierPath, withColor color: UIColor){
+        path.lineWidth = 2.0
+        color.setStroke()
         path.stroke()
     }
     
-    private func drawOval() {
-        let path = UIBezierPath()
-
-        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.height*0.2),radius: bounds.width*0.1, startAngle: 180.degreesToRadians , endAngle: 0.degreesToRadians, clockwise: true)
+    private func fill(shape path: UIBezierPath, withColor color: UIColor) {
+        color.setFill()
+        path.fill()
+    }
+    
+    private func stripe(shape path: UIBezierPath, withColor color: UIColor) {
+        outline(shape: path, withColor: color)
         
+        //This is necessary to have multiple striped shapes.
+        let context = UIGraphicsGetCurrentContext()!
+        context.saveGState()
         
-        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.height*0.8),radius: bounds.width*0.1, startAngle:0.degreesToRadians , endAngle: 180.degreesToRadians, clockwise: true)
-        path.addLine(to: CGPoint(x:bounds.midX-bounds.width*0.1, y:bounds.height*0.2))
-        
-//        (arcCenter: CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2),
-//         radius: self.frame.size.height/2,
-//         startAngle: CGFloat(180.0).toRadians(),
-//         endAngle: CGFloat(0.0).toRadians(),
-//         clockwise: true)
-        path.lineWidth = 3
-        UIColor.green.setFill()
-        UIColor.blue.setStroke()
+        path.addClip()
+        for x in stride(from: path.bounds.minX, to: path.bounds.maxX, by: 3) {
+            path.move(to: CGPoint(x: x, y: path.bounds.minY))
+            path.addLine(to: CGPoint(x: x, y: path.bounds.maxY))
+        }
+        path.lineWidth = 1.0
+        color.setStroke()
         path.stroke()
         
+        context.restoreGState()
     }
-    private func drawSquiggle() {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: bounds.minX+bounds.width*0.1
-            , y: bounds.minY+bounds.height*0.4))
-
-        path.addCurve(to: CGPoint(x: self.frame.size.width-frame.size.width*0.1, y:self.frame.size.height-frame.size.height*0.4 ),
-                      controlPoint1: CGPoint(x: self.frame.size.width - self.frame.size.width*0.4, y: -frame.size.height*0.3),
-                      controlPoint2: CGPoint(x: self.frame.size.width*0.3, y: frame.size.height*0.8))
-        
-        path.addCurve(to: CGPoint(x: bounds.minX+bounds.width*0.1, y:bounds.minY+bounds.height*0.4 ),
-                      controlPoint1: CGPoint(x: self.frame.size.width * 0.5, y: frame.size.height + frame.size.height*0.3),
-                      controlPoint2: CGPoint(x: self.frame.size.width*0.5, y: frame.size.height*0.3))
-        
-
-
-        path.close()
-        UIColor.red.setStroke()
-        path.stroke()
-       
-    }
-   
 }
-extension BinaryInteger {
-    var degreesToRadians: CGFloat { return CGFloat(Int(self)) * .pi / 180 }
+
+extension SetCardView {
+    private struct SizeRatio {
+        static let cornerRadiusToMaximalBoundsDimension: CGFloat = 0.06
+        static let cardBorderToBoundsRatio: CGFloat = 0.1
+        static let internalBorderToBoundsRatio: CGFloat = 0.025
+    }
+    
+    private var cornerRadius: CGFloat {
+        if bounds.height > bounds.width {
+            return SizeRatio.cornerRadiusToMaximalBoundsDimension * bounds.height
+        } else {
+            return SizeRatio.cornerRadiusToMaximalBoundsDimension * bounds.width
+        }
+    }
+    
+    private var borderHeight: CGFloat {
+        return SizeRatio.cardBorderToBoundsRatio * bounds.height
+    }
+    
+    private var borderWidth: CGFloat {
+        return SizeRatio.cardBorderToBoundsRatio * bounds.width
+    }
+    
+    private var internalBorderHeight: CGFloat {
+        return SizeRatio.internalBorderToBoundsRatio * bounds.height
+    }
+    
+    private var internalBorderWidth: CGFloat {
+        return SizeRatio.internalBorderToBoundsRatio * bounds.width
+    }
 }
 
-extension FloatingPoint {
-    var degreesToRadians: Self { return self * .pi / 180 }
-    var radiansToDegrees: Self { return self * 180 / .pi }
+extension UIColor {
+    
+    convenience init(rgbColorCodeRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
+        
+        let redPart: CGFloat = CGFloat(red) / 255
+        let greenPart: CGFloat = CGFloat(green) / 255
+        let bluePart: CGFloat = CGFloat(blue) / 255
+        
+        self.init(red: redPart, green: greenPart, blue: bluePart, alpha: alpha)
+        
+    }
 }
