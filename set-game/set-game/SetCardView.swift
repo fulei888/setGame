@@ -23,14 +23,16 @@ class SetCardView: UIView
     var color: UIColor = UIColor.red  { didSet { setNeedsDisplay() } }
     var shading: CardShading = .striped  { didSet { setNeedsDisplay() } }
     var shape: CardShape = .oval  { didSet { setNeedsDisplay() } }
-    var number: Int = 2 { didSet { setNeedsDisplay() } }
+    var number: Int = 3 { didSet { setNeedsDisplay() } }
     var isFaceUp: Bool = true { didSet { setNeedsDisplay() } }
     
     var outlineColor: UIColor? = nil { didSet { setNeedsDisplay() } }
+    var redBorder: Bool = false
+    var blueBorder: Bool = false
+    var greenBorder: Bool = false
     
     private var orientation: CardOrientation {
         if bounds.height > bounds.width {
-            
             return .vertical
         } else {
             return .horizontal
@@ -61,6 +63,12 @@ class SetCardView: UIView
         roundedRect.addClip()
         if isFaceUp {
             UIColor.white.setFill()
+            if redBorder{
+            UIColor.red.setStroke()
+            }
+            if blueBorder{
+               UIColor.blue.setStroke()
+            }
             if let outlineColor = outlineColor {
                 roundedRect.lineWidth = 5.0
                 outlineColor.setStroke()
@@ -70,6 +78,18 @@ class SetCardView: UIView
             roundedRect.fill()
             roundedRect.lineWidth = 2.0
             UIColor.white.setStroke()
+        }
+        if redBorder{
+            UIColor.red.setStroke()
+            roundedRect.lineWidth = 10.0
+        }
+        if blueBorder{
+            UIColor.blue.setStroke()
+            roundedRect.lineWidth = 10.0
+        }
+        if greenBorder{
+            UIColor.green.setStroke()
+            roundedRect.lineWidth = 10.0
         }
         roundedRect.fill()
         roundedRect.stroke()

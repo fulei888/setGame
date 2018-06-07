@@ -9,15 +9,16 @@
 import Foundation
 class setgame{
     
-    private(set) var cards = [Card]()
-    private(set) var restCards = [Card]()
+     var cards = [Card]()
+     var tempCards = [Card]()
+     var restCards = [Card]()
     private(set) var clickedCards = [Card]()
     private(set) var index1 = 0
     private(set) var index2 = 0
     private(set) var index3 = 0
     private(set) var delayColorSiginal = false
     private(set) var delayCardSignal = false
-    private(set) var score = 10
+     var score = 10
     private(set) var color = false
     
     private(set) var symbol = false
@@ -161,7 +162,8 @@ class setgame{
     
     func chooseCard (closure: () -> Bool, at index: Int){
         
-        assert(cards.indices.contains(index), "chosen index not in the cards")
+       assert(cards.indices.contains(index), "chosen index not in the cards")
+        
         
         
         
@@ -233,6 +235,7 @@ class setgame{
 //
 //
 //    }
+   
     func delayRemoveCard(){
         
        // clickedCards.forEach {
@@ -245,7 +248,7 @@ class setgame{
                     cards.insert(newCard, at: indexInCards)
                 }
                 else {
-                    
+                    cards.remove(at: indexInCards )
                     noRestCardSignal = true
                     freezingIndex.append(indexInCards)
                     
@@ -290,7 +293,18 @@ class setgame{
             }
         }
     }
-    
+    func shuffleCard(){
+        let num = cards.count
+        for _ in 0..<num {
+            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+            let randomCard = cards.remove(at: randomIndex)
+            tempCards.append(randomCard)
+            
+        }
+        cards = tempCards
+        tempCards.removeAll()
+        
+    }
     
     
     func giveCard (){

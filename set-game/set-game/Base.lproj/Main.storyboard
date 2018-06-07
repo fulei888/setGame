@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
+    <device id="ipad12_9" orientation="landscape">
+        <adaptation id="splitview1_3"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -16,11 +16,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="set_game" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N9H-Mp-gmI">
-                                <rect key="frame" x="16" y="748" width="343" height="30"/>
+                                <rect key="frame" x="16" y="994" width="343" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10O-as-iqU">
                                         <rect key="frame" x="0.0" y="0.0" width="109" height="30"/>
@@ -54,38 +54,66 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Score:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-ap-faU">
-                                <rect key="frame" x="85" y="32.333333333333343" width="81.333333333333314" height="28.666666666666664"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-ap-faU">
+                                <rect key="frame" x="85" y="32" width="81.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6M2-4Q-XFg" customClass="SetCardView" customModule="set_game">
-                                <rect key="frame" x="51" y="164" width="257" height="134"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1by-nI-Uxd">
+                                <rect key="frame" x="16" y="69" width="343" height="875"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="shape" value="oval"/>
-                                </userDefinedRuntimeAttributes>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fth-gV-rSH" appends="YES" id="hPV-QL-7Qy"/>
+                                    <outletCollection property="gestureRecognizers" destination="2Z4-of-XP0" appends="YES" id="b2Q-IE-qBY"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YLa-ap-faU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="85" id="AaM-27-nsl"/>
+                            <constraint firstAttribute="bottom" secondItem="1by-nI-Uxd" secondAttribute="bottom" constant="80" id="BU3-fu-Vrt"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YLa-ap-faU" secondAttribute="trailing" constant="20" symbolic="YES" id="CWa-Tx-DTe"/>
+                            <constraint firstItem="Rnh-JI-WAj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1by-nI-Uxd" secondAttribute="bottom" id="FSj-My-gXl"/>
+                            <constraint firstItem="1by-nI-Uxd" firstAttribute="top" secondItem="YLa-ap-faU" secondAttribute="bottom" constant="8" symbolic="YES" id="Is8-0Q-orn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N9H-Mp-gmI" secondAttribute="trailing" constant="16" id="Lkj-Vw-gok"/>
+                            <constraint firstItem="1by-nI-Uxd" firstAttribute="leading" secondItem="N9H-Mp-gmI" secondAttribute="leading" id="V8G-xE-uKy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N9H-Mp-gmI" secondAttribute="bottom" id="Vn9-jc-U5f"/>
                             <constraint firstItem="N9H-Mp-gmI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="khn-Dn-nPs"/>
+                            <constraint firstItem="1by-nI-Uxd" firstAttribute="trailing" secondItem="N9H-Mp-gmI" secondAttribute="trailing" id="lON-mB-nBD"/>
+                            <constraint firstItem="YLa-ap-faU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="tUV-u7-Ai9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="91a-qL-Xfm" appends="YES" id="b4T-C8-Miv"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="Score" destination="YLa-ap-faU" id="jPS-9g-ppq"/>
+                        <outlet property="gameView" destination="1by-nI-Uxd" id="xpt-bZ-fk5"/>
                         <outlet property="noMoreThanThree" destination="Rnh-JI-WAj" id="S3C-7Z-Tdo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <rotationGestureRecognizer id="fth-gV-rSH">
+                    <connections>
+                        <action selector="rotate:" destination="BYZ-38-t0r" id="F5k-wx-11B"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="91a-qL-Xfm">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="9kV-u9-bw0"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <tapGestureRecognizer id="2Z4-of-XP0">
+                    <connections>
+                        <action selector="touchCard:" destination="BYZ-38-t0r" id="LvL-qE-Pgb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="117.48768472906404" y="117.59999999999999"/>
+            <point key="canvasLocation" x="116" y="117.18749999999999"/>
         </scene>
     </scenes>
 </document>

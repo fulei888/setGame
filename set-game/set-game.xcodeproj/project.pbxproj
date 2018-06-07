@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A5690E220C38FCA00C6E3FB /* SetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5690E120C38FCA00C6E3FB /* SetCardView.swift */; };
 		9A5690E420C3930900C6E3FB /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5690E320C3930900C6E3FB /* SetGameViewController.swift */; };
+		9AF7BB1C20C874FF00E1CBE5 /* CardSizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */; };
 		BC1B1C1020B24A6E00ED2471 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C0F20B24A6E00ED2471 /* AppDelegate.swift */; };
 		BC1B1C1220B24A6E00ED2471 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C1120B24A6E00ED2471 /* ViewController.swift */; };
 		BC1B1C1520B24A6E00ED2471 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B1C1320B24A6E00ED2471 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		9A5690E120C38FCA00C6E3FB /* SetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardView.swift; sourceTree = "<group>"; };
 		9A5690E320C3930900C6E3FB /* SetGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewController.swift; sourceTree = "<group>"; };
+		9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSizeConstants.swift; sourceTree = "<group>"; };
 		BC1B1C0C20B24A6E00ED2471 /* set-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "set-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC1B1C0F20B24A6E00ED2471 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC1B1C1120B24A6E00ED2471 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				BCDAE70020B5631C002AB420 /* buttonTitle.swift */,
 				9A5690E120C38FCA00C6E3FB /* SetCardView.swift */,
 				9A5690E320C3930900C6E3FB /* SetGameViewController.swift */,
+				9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */,
 			);
 			path = "set-game";
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				9A5690E220C38FCA00C6E3FB /* SetCardView.swift in Sources */,
 				BC1B1C2620B2636700ED2471 /* set-game.swift in Sources */,
 				BC1B1C1220B24A6E00ED2471 /* ViewController.swift in Sources */,
+				9AF7BB1C20C874FF00E1CBE5 /* CardSizeConstants.swift in Sources */,
 				BC1B1C2420B262FC00ED2471 /* Card.swift in Sources */,
 				BC1B1C1020B24A6E00ED2471 /* AppDelegate.swift in Sources */,
 				9A5690E420C3930900C6E3FB /* SetGameViewController.swift in Sources */,

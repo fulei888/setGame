@@ -63,5 +63,16 @@ enum CardShading {
     static let allValues = [solid, striped, open]
 }
 
+//extension Card: Hashable {
+//    var hashValue: Int {
+//        return (cardColor.rawValue) + (cardNumber.rawValue * 3) + (cardShading.rawValue * 9) + (cardShading.rawValue * 27)
+//    }
+//
+//    static func ==(lhs: Card, rhs: Card) -> Bool {
+//        return lhs.hashValue == rhs.hashValue
+//}
+//}
+//}
+
 
 
