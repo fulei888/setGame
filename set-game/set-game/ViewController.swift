@@ -46,7 +46,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var gameView: UIView!{
         didSet {
-            
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Deal(_:)))
+            swipe.direction = .down
+            gameView.addGestureRecognizer(swipe)
         }
         
     }
@@ -66,15 +68,24 @@ class ViewController: UIViewController {
             }
     
     @IBAction func swipe(_ sender: UISwipeGestureRecognizer) {
-        if game.restCards.count == 0 {
-            noMoreThanThree.isEnabled = false
+        print(sender.direction)
+        if sender.direction == .up {
+            print("Swipe up")
         }
-        else{
-            game.setCards(numberOfCards: 3)
-            game.score -= 1
-            updateViewFromModel()
+        if sender.direction == .down {
+            print("Swipe down")
+            if game.restCards.count == 0 {
+                noMoreThanThree.isEnabled = false
+            }
+            else{
+                game.setCards(numberOfCards: 3)
+                game.score -= 1
+                updateViewFromModel()
+                
+            }
             
         }
+        
         
     }
     
@@ -119,17 +130,22 @@ class ViewController: UIViewController {
     
     @IBAction func Deal(_ sender: UIButton) {
         
+        drawThreeCard()
+        
+        
+        
+    }
+    
+    func drawThreeCard(){
         if game.restCards.count == 0 {
             noMoreThanThree.isEnabled = false
-                        }
-        else{
-        game.setCards(numberOfCards: 3)
-            game.score -= 1
-        updateViewFromModel()
-        
         }
-        
-        
+        else{
+            game.setCards(numberOfCards: 3)
+            game.score -= 1
+            updateViewFromModel()
+            
+        }
         
     }
     
