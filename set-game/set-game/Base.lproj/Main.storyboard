@@ -102,7 +102,7 @@
                         <action selector="rotate:" destination="BYZ-38-t0r" id="F5k-wx-11B"/>
                     </connections>
                 </rotationGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="91a-qL-Xfm">
+                <swipeGestureRecognizer direction="down" id="91a-qL-Xfm">
                     <connections>
                         <action selector="swipe:" destination="BYZ-38-t0r" id="9kV-u9-bw0"/>
                     </connections>

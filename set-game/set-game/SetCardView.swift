@@ -20,16 +20,18 @@ class SetCardView: UIView
         case oval
     }
     
+    
+    var redBorder: Bool = false
+    var blueBorder: Bool = false
+    var greenBorder: Bool = false
     var color: UIColor = UIColor.red  { didSet { setNeedsDisplay() } }
     var shading: CardShading = .striped  { didSet { setNeedsDisplay() } }
     var shape: CardShape = .oval  { didSet { setNeedsDisplay() } }
     var number: Int = 3 { didSet { setNeedsDisplay() } }
-    var isFaceUp: Bool = true { didSet { setNeedsDisplay() } }
+    
     
     var outlineColor: UIColor? = nil { didSet { setNeedsDisplay() } }
-    var redBorder: Bool = false
-    var blueBorder: Bool = false
-    var greenBorder: Bool = false
+    
     
     private var orientation: CardOrientation {
         if bounds.height > bounds.width {
@@ -40,10 +42,10 @@ class SetCardView: UIView
     }
     
     override func draw(_ rect: CGRect) {
-        createCardBack()
-        if isFaceUp {
+        createCardView()
+       
             createShapes()
-        }
+        
     }
     
     override func setNeedsDisplay() {
@@ -58,10 +60,10 @@ class SetCardView: UIView
         setNeedsDisplay()
     }
     
-    private func createCardBack() {
+    private func createCardView() {
         let roundedRect = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         roundedRect.addClip()
-        if isFaceUp {
+        
             UIColor.white.setFill()
             if redBorder{
             UIColor.red.setStroke()
@@ -73,12 +75,7 @@ class SetCardView: UIView
                 roundedRect.lineWidth = 5.0
                 outlineColor.setStroke()
             }
-        } else {
-            UIColor(rgbColorCodeRed: 255, green: 50, blue: 60, alpha: 1.0).setFill()
-            roundedRect.fill()
-            roundedRect.lineWidth = 2.0
-            UIColor.white.setStroke()
-        }
+        
         if redBorder{
             UIColor.red.setStroke()
             roundedRect.lineWidth = 10.0

@@ -44,14 +44,15 @@ class ViewController: UIViewController {
     }
     @IBOutlet weak var Score: UILabel!
     
-    @IBOutlet weak var gameView: UIView!{
-        didSet {
-            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Deal(_:)))
-            swipe.direction = .down
-            gameView.addGestureRecognizer(swipe)
-        }
+    @IBOutlet weak var gameView: UIView!
+    //{
+//        didSet {
+//            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(Deal(_:)))
+//            swipe.direction = .down
+//            gameView.addGestureRecognizer(swipe)
+//        }
         
-    }
+//    }
     @IBAction func Restart(_ sender: Any) {
         
                 restart()
@@ -69,9 +70,7 @@ class ViewController: UIViewController {
     
     @IBAction func swipe(_ sender: UISwipeGestureRecognizer) {
         print(sender.direction)
-        if sender.direction == .up {
-            print("Swipe up")
-        }
+        
         if sender.direction == .down {
             print("Swipe down")
             if game.restCards.count == 0 {
