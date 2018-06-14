@@ -285,7 +285,13 @@ class setgame{
             for symbol in CardSymbol.allValues{
                 for number in CardNumber.allValues{
                     for shading in CardShading.allValues{
-                        let newCard = Card(clicked: false, isMatched: false, cardColor: color, cardSymbol: symbol, cardNumber: number, cardShading: shading)
+                        var newCard = Card()
+                        newCard.clicked = false
+                        newCard.isMatched = false
+                        newCard.cardColor = color
+                        newCard.cardSymbol = symbol
+                        newCard.cardNumber = number
+                        newCard.cardShading = shading
                         restCards.append(newCard)
                         
                     }

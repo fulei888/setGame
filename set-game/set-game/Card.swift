@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct Card : Equatable {
+struct Card : Equatable, Hashable{
     
     static func ==(lhs: Card, rhs: Card) -> Bool {
         
@@ -15,16 +15,32 @@ struct Card : Equatable {
         return  lhs.cardColor == rhs.cardColor &&
             lhs.cardNumber == rhs.cardNumber &&
             lhs.cardShading == rhs.cardShading &&
-            lhs.cardSymbol == rhs.cardSymbol
+            lhs.cardSymbol == rhs.cardSymbol &&
+        lhs.identifier == rhs.identifier
+        
     }
     
     var clicked = false
     var isMatched = false
+    var hashValue: Int {
+        return identifier
+    }
+     var identifier: Int
+    var cardColor: CardColor = .green
+    var cardSymbol: CardSymbol = .diamond
+    var cardNumber: CardNumber = .one
+    var cardShading: CardShading = .solid
     
-    let cardColor: CardColor
-    let cardSymbol: CardSymbol
-    let cardNumber: CardNumber
-    let cardShading: CardShading
+    private static var identifierFactory = 0
+    
+    private static func getUniqueIdentifier() -> Int {
+        identifierFactory += 1
+        return identifierFactory
+    }
+    init() {
+        self.identifier = Card.getUniqueIdentifier()
+        
+    }
     
    
 }

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "set-game/ViewController.swift"
-            timestampString = "550225618.1983761"
+            timestampString = "550657977.907268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "createCardView(_:)"
             landmarkType = "7">
          </BreakpointContent>

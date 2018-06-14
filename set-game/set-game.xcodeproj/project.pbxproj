@@ -10,6 +10,11 @@
 		9A5690E220C38FCA00C6E3FB /* SetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5690E120C38FCA00C6E3FB /* SetCardView.swift */; };
 		9A5690E420C3930900C6E3FB /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5690E320C3930900C6E3FB /* SetGameViewController.swift */; };
 		9AF7BB1C20C874FF00E1CBE5 /* CardSizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */; };
+		9AF7BB3D20D1F00700E1CBE5 /* ConcentrationThemeChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB3920D1F00600E1CBE5 /* ConcentrationThemeChooseViewController.swift */; };
+		9AF7BB3E20D1F00700E1CBE5 /* ConcentrationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB3A20D1F00600E1CBE5 /* ConcentrationCard.swift */; };
+		9AF7BB3F20D1F00700E1CBE5 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB3B20D1F00600E1CBE5 /* Concentration.swift */; };
+		9AF7BB4020D1F00700E1CBE5 /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB3C20D1F00600E1CBE5 /* ConcentrationViewController.swift */; };
+		9AF7BB4420D1F7D900E1CBE5 /* DeckSizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF7BB4320D1F7D900E1CBE5 /* DeckSizeConstants.swift */; };
 		BC1B1C1020B24A6E00ED2471 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C0F20B24A6E00ED2471 /* AppDelegate.swift */; };
 		BC1B1C1220B24A6E00ED2471 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1B1C1120B24A6E00ED2471 /* ViewController.swift */; };
 		BC1B1C1520B24A6E00ED2471 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B1C1320B24A6E00ED2471 /* Main.storyboard */; };
@@ -24,6 +29,11 @@
 		9A5690E120C38FCA00C6E3FB /* SetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardView.swift; sourceTree = "<group>"; };
 		9A5690E320C3930900C6E3FB /* SetGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewController.swift; sourceTree = "<group>"; };
 		9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSizeConstants.swift; sourceTree = "<group>"; };
+		9AF7BB3920D1F00600E1CBE5 /* ConcentrationThemeChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooseViewController.swift; sourceTree = "<group>"; };
+		9AF7BB3A20D1F00600E1CBE5 /* ConcentrationCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationCard.swift; sourceTree = "<group>"; };
+		9AF7BB3B20D1F00600E1CBE5 /* Concentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		9AF7BB3C20D1F00600E1CBE5 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
+		9AF7BB4320D1F7D900E1CBE5 /* DeckSizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckSizeConstants.swift; sourceTree = "<group>"; };
 		BC1B1C0C20B24A6E00ED2471 /* set-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "set-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC1B1C0F20B24A6E00ED2471 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC1B1C1120B24A6E00ED2471 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +88,11 @@
 				9A5690E120C38FCA00C6E3FB /* SetCardView.swift */,
 				9A5690E320C3930900C6E3FB /* SetGameViewController.swift */,
 				9AF7BB1B20C874FF00E1CBE5 /* CardSizeConstants.swift */,
+				9AF7BB3B20D1F00600E1CBE5 /* Concentration.swift */,
+				9AF7BB3A20D1F00600E1CBE5 /* ConcentrationCard.swift */,
+				9AF7BB3920D1F00600E1CBE5 /* ConcentrationThemeChooseViewController.swift */,
+				9AF7BB3C20D1F00600E1CBE5 /* ConcentrationViewController.swift */,
+				9AF7BB4320D1F7D900E1CBE5 /* DeckSizeConstants.swift */,
 			);
 			path = "set-game";
 			sourceTree = "<group>";
@@ -153,14 +168,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF7BB3F20D1F00700E1CBE5 /* Concentration.swift in Sources */,
 				BCDAE70120B5631C002AB420 /* buttonTitle.swift in Sources */,
 				9A5690E220C38FCA00C6E3FB /* SetCardView.swift in Sources */,
 				BC1B1C2620B2636700ED2471 /* set-game.swift in Sources */,
+				9AF7BB4420D1F7D900E1CBE5 /* DeckSizeConstants.swift in Sources */,
 				BC1B1C1220B24A6E00ED2471 /* ViewController.swift in Sources */,
 				9AF7BB1C20C874FF00E1CBE5 /* CardSizeConstants.swift in Sources */,
+				9AF7BB4020D1F00700E1CBE5 /* ConcentrationViewController.swift in Sources */,
 				BC1B1C2420B262FC00ED2471 /* Card.swift in Sources */,
+				9AF7BB3D20D1F00700E1CBE5 /* ConcentrationThemeChooseViewController.swift in Sources */,
 				BC1B1C1020B24A6E00ED2471 /* AppDelegate.swift in Sources */,
 				9A5690E420C3930900C6E3FB /* SetGameViewController.swift in Sources */,
+				9AF7BB3E20D1F00700E1CBE5 /* ConcentrationCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
